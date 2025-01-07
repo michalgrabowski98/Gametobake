@@ -1,9 +1,3 @@
-#import dla tworzenia okna
-import tkinter as tk
-
-window = tk.Tk()   
-window.mainloop()
-
 #kod gry
 
 #gracz nadaje imie swojej postaci
