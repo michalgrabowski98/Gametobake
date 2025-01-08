@@ -1,5 +1,7 @@
 import tkinter as tk
+from playsound import playsound
 from PIL import Image, ImageTk
+
 
 class MyApp(tk.Frame):
     def __init__(self, root):
@@ -35,18 +37,27 @@ class MyApp(tk.Frame):
 
         root.after(100, self._play_gif, self.label_gif1, self.gif1_frames)
 
-
+        #muziczka jak się definuje   
+        play = lambda: playsound('ASMRPIWO.mp3',block=False)
 
         #guzik
-
+        self.button2= tk.Button(
+            self.main_frame,
+            text = "Exit",
+            width= 10,
+            height=2,
+            command = root.destroy
+        )
         self.button = tk.Button(
             self.main_frame,
-            text='Guzior na piwoooo 🍺🍺🍺🍺',
-            width=20,
-            height=2
+            text='Naciśnij guzior aby wypić piwko 🍺🍺🍺🍺',
+            width=40,
+            height=2,
+            command= play
         )
 
         self.button.grid(column=0, row=1)
+        self.button2.grid(column=0, row=3)
 
     def _get_frames(self, img):
 
