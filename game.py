@@ -10,8 +10,11 @@ def nameofplayer():
     if name:
         lbl.configure (text = f"Hello {name}. Do you want to play the game? (YES/NO)")
         btn.configure (text = "Next", command=answer1)
+        btn.place (relx=0.45)
         Lblbox.configure (text= f"Name: {name}\nStage:1")
         txt.delete(0, END)
+        btn1 = Button(root, text = "Enter", )
+        btn1.place(relx=0.55, rely=0.6, anchor=CENTER)
 
         #bez tego elsa mi nie działa xD nie wiem czm. on tu dla picu
     else: 
