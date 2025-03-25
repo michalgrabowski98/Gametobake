@@ -1,6 +1,6 @@
 from tkinter import *
 
-#wprowadzanie imiona
+#wprowadzanie imiona początek gry
 def nameofplayer():
     
     global name
@@ -9,57 +9,63 @@ def nameofplayer():
     #if sprawdza czy coś zostało wprowadzone
     if name:
         lbl.configure (text = f"Hello {name}. Do you want to play the game? (YES/NO)")
-        btn.configure (text = "Next", command=answer1)
+        btn.configure (text = "YES", command= lambda: answer1(1))
         btn.place (relx=0.45)
         Lblbox.configure (text= f"Name: {name}\nStage:1")
-        txt.delete(0, END)
-        btn1 = Button(root, text = "Enter", )
+        
+        #miejsce tworzenia guzika nr2
+        btn1.configure (text = "NO", command= lambda:[answer1(0)] )
         btn1.place(relx=0.55, rely=0.6, anchor=CENTER)
-
+              
+       
         #bez tego elsa mi nie działa xD nie wiem czm. on tu dla picu
     else: 
         lbl.configure (text = "Please press button EXIT to exit")
         btn.configure (text="EXIT", command= root.destroy)
-        txt.delete(0, END)
+        
     #delete czyści pole tekstowe txt od 0 - początek do END - koniec
-    txt.delete(0, END)
+    
 
-def answer1():
+def answer1(btn_id):
 
-    answer = txt.get().lower().strip()
-    if answer == "yes":
+    
+    if btn_id == 1:
         
         lbl.configure(text="You have reached doors to big crypt. It's kinda strange to see also some ring attached to this doors, they have eletricity down there?")
-        btn.configure(text="Next", command=answer2)
+        btn.configure(text="Knock", command= lambda:answer2(2))
         Lblbox.configure (text= f"Name: {name}\nStage:2")
-        txt.delete(0, END)
+        btn1.configure(text="ring",command=lambda:answer2(3))
+        
     
-    elif answer == "no": 
+    elif btn_id == 0: 
         lbl.configure (text = "Please press button EXIT to exit")
         btn.configure (text="EXIT", command= root.destroy)
+        btn.place(relx=0.5, rely=0.6, anchor=CENTER)
+        btn1.grid()
         Lblbox.configure (text= f"Name: {name}\nStage:2")
-        txt.delete(0, END)
-    else:
-        lbl.configure (text = "Please press button EXIT to exit")
-        btn.configure (text="EXIT", command= root.destroy)
-        txt.delete(0, END)
+        
+        #znikanie guzika
+        
+    #else:
+        #lbl.configure (text = "Please press button EXIT to exit")
+        #btn.configure (text="EXIT", command= root.destroy)
+        #
 
-def answer2():
-    answer = txt.get().lower().strip()
-    if answer == "knock": 
+def answer2(btn_id):
+    if btn_id ==2:
         
         lbl.configure(text=f"The old woman, around here 30s, opened the door and looks at you with her dark brown eyes - What is your wish to find here {name}?")
         Lblbox.configure (text= f"Name: {name}\nStage:3")
         btn.configure(text= "Next", command= answer3women)
-        txt.delete(0, END)
+        
 
 
-    elif answer == "ring":
+    elif btn_id == 3:
 
         lbl.configure(text="X")
         Lblbox.configure (text= f"Name: {name}\nStage:3")
         btn.configure(text="Next", command=answer3femoby)
-        txt.delete(0, END)
+        
 
 #womanpath
 def answer3women():
@@ -70,13 +76,13 @@ def answer3women():
         lbl.configure(text=f"A rather peculiar and somewhat melancholic request has been received from your esteemed establishment, {name}.\nMight you be so kind as to discuss the matter over a spot of tea and a selection of biscuits?")
         Lblbox.configure (text= f"Name: {name}\nStage:4")
         btn.configure(command= answer4women_happines)
-        txt.delete(0, END)
+        
 #czym jest miłość?
     elif answer == "love":
         lbl.configure (text= f"Love, you say? Oh, my dear {name}, pray tell me you have not resorted to seeking the aid of the dark arts in this matter!")
         Lblbox.configure (text= f"Name: {name}\nStage:4")
         btn.configure(command= answer4women_love)
-        txt.delete(0, END)
+        
 #        
     else:
         lbl.configure (text="I can only answer to you in matters of lovers or your own personal happines.\n I'm so sorry, but you have to leave this place if you don't have any of this matter on your mind")
@@ -95,7 +101,6 @@ def answer4women_love():
     if answer == "yes":
         lbl.configure (text="X")
 #femboypath
-
 
 
 
@@ -140,6 +145,12 @@ Lblbox.pack(side ='top')
 #button exit, przycisk wyjścia dla gracza 
 button_exit = Button(frame, text= "EXIT", command= root.destroy)
 button_exit.pack(side = 'top')
+
+
+#def hide_button(widget):
+   # widget.pack()
+btn1 = Button(root)
+btn1.place()
 
 
 
