@@ -74,7 +74,7 @@ class MyApp(tk.Frame):
     def _play_gif(self, label, frames):
          
         total_delay = 5
-        delay_frames = 10
+        delay_frames = 1
 
         for frame in frames:
             root.after(total_delay, self._next_frame, frame, label, frames)
